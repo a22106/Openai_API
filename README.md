@@ -1,1 +1,1 @@
-# Pius' Usage examples of Openai_API
+# Examples of Pius using the OpenAI API
