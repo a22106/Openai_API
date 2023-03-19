@@ -1,0 +1,4 @@
+output/*
+input/*
+!output/output_audio_file_here.txt
+!input/input_audio_file_here.txt
