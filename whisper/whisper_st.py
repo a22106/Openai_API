@@ -20,6 +20,7 @@ parser.add_argument('--input', '-i', type=str, default=DEFAULT_PATH, help='Input
 parser.add_argument('--output', '-o', type=str, default=OUTPUT_PATH, help='Output file path to save the transcription')
 parser.add_argument('--sleep', '-s', action='store_true', default=False, help='Sleep for each segment', required=False)
 parser.add_argument('--save', '-S', type=str, default=None, help='Save the transcription to a file, "ass", "srt", or "json"')
+parser.add_argument('--verbose', '-v', action='store_true', default=None, help='Print verbose output')
 args = parser.parse_args()
 
 def mkdir(path):
@@ -42,6 +43,7 @@ def load_model(model_name):
     end_time = time.time()
     time_elapsed = end_time - start_time
     print(f"Model loaded. Took {time_elapsed:.2f} seconds to load.")
+    print("Listening for new audio...")
     return model
 
 
@@ -52,7 +54,7 @@ class MyHandler(FileSystemEventHandler):
     def __init__(self, args, model):
         self.args = args
         self.model = model
-        self.verbose = not args.sleep
+        self.verbose = args.verbose
 
     # when the file is created, it will be processed
     def on_created(self, event):
@@ -61,7 +63,7 @@ class MyHandler(FileSystemEventHandler):
 
     def process_audio_file(self, file_path):
         filename = os.path.splitext(os.path.basename(file_path))[0]
-        print(f"New audio detected: {file_path}")
+        # print(f"New audio detected: {file_path}")
         time.sleep(1)  # Allow a short delay for the file to be fully written
 
         result = self.model.transcribe(file_path, verbose=self.verbose, word_timestamps=False, **MyHandler.TRANSCRIPTION_OPTIONS)
