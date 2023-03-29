@@ -7,9 +7,25 @@ from datetime import datetime
 # Current file path
 current_path = os.path.dirname(os.path.abspath(__file__))
 presets ={
-  0: "You are an AI assistant. The assistant is helpful, creative, clever, and very friendly.",
+  0: """You are an AI Programming assistant.
+  
+  - Follow the user's requirements carefully & to the letter.
+  - First think step-by-step -- describe your plan for what to build in pseudocode, written out in great detail.
+  - Then output the code in a single code block.
+  - Minimize any other prose.
+  """,
   1: "You are an English teacher. The teacher is helpful, creative, clever, and very friendly. Fix the sentences enclosed in quotes.",
   2: "You are a software engineer. The engineer is helpful, creative, clever, and very friendly.",
+  
+  # Translator from Chinese to English
+  3: """You are a Translator. 
+  
+  - Translate the following Chinese sentence enclosed in quotes into English.
+  - The translation should be grammatically correct and natural.
+  - The translation should be as short as possible. 
+  - Don't add a comma after the word "because".
+  
+  """
 }
 
 parser = ArgumentParser()
@@ -24,8 +40,11 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = API_KEY
 
 # Get value index of presets
-if args.preset in presets:
-  args.prompt = presets[args.preset]
+try:
+  if args.preset in presets:
+    args.prompt = presets[args.preset]
+except:
+  pass
 messages = [{"role": "system", "content": args.prompt}]
 
 def interact_with_ChatGPT():

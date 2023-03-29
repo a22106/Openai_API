@@ -43,7 +43,7 @@ def load_model(model_name):
     end_time = time.time()
     time_elapsed = end_time - start_time
     print(f"Model loaded. Took {time_elapsed:.2f} seconds to load.")
-    print("Listening for new audio...")
+    print("Waiting for new audio to play...")
     return model
 
 
