@@ -67,7 +67,7 @@ def interact_with_ChatGPT():
     except openai.error.RateLimitError:
       print_message("OpenAI Error: (RateLimitError)API rate limit reached. Please wait a few minutes before trying again.")
       continue
-  
+
 
 # Log feature start
 SERVER_START = datetime.now().strftime('%Y%m%d_%H%M%S')
