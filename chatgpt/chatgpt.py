@@ -39,7 +39,7 @@ parser = ArgumentParser()
 parser.add_argument("--prompt", "-pp", type=str, default=presets["0"], help="Prompt of ChatGPT")
 parser.add_argument("--preset", "-ps", type=str, help="Prompt preset of ChatGPT", default="0")
 parser.add_argument("--show_presets", "-sp", action="store_true", help="Show presets of ChatGPT")
-parser.add_argument("--model", "-m", type=int, default=models[4], help="Model of ChatGPT")
+parser.add_argument("--model", "-m", type=int, default=4, help="Model of ChatGPT")
 args = parser.parse_args()
 
 # Load .env file
